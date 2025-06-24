@@ -1,3 +1,5 @@
+import { formatDate } from "../utils/utils";
+
 function ArticleCard({ article }) {
   const {
     title,
@@ -17,7 +19,7 @@ function ArticleCard({ article }) {
       <p>Topic: {topic}</p>
       <p>Comments: {comment_count}</p>
       <p>Votes: {votes}</p>
-      <p>Published: {new Date(created_at).toLocaleDateString()}</p>
+      <p>Published: {formatDate(article.created_at)}</p>
     </article>
   );
 }
