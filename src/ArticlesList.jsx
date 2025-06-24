@@ -36,14 +36,14 @@ function ArticleList() {
   }
 
   return (
-    <>
+    <main>
       <h2>Home Page</h2>
       <section className="article-list">
         {articles.map((article) => (
           <ArticleCard key={article.article_id} article={article} />
         ))}
       </section>
-    </>
+    </main>
   );
 }
 export default ArticleList;
