@@ -19,7 +19,7 @@ function ArticleCard({ article }) {
       <p>Topic: {topic}</p>
       <p>Comments: {comment_count}</p>
       <p>Votes: {votes}</p>
-      <p>Published: {formatDate(article.created_at)}</p>
+      <p>Published: {formatDate(created_at)}</p>
     </article>
   );
 }
