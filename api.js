@@ -1,5 +1,5 @@
 export function getAllArticles() {
-  return fetch(`https://nc-news-api-aoq3.onrender.com/api/articles`).then(
+  return fetch("https://nc-news-api-aoq3.onrender.com/api/articles").then(
     (res) => {
       if (!res.ok) {
         return Promise.reject({
@@ -7,7 +7,9 @@ export function getAllArticles() {
           msg: "Failed to fetch articles",
         });
       }
-      return res.json().then((article) => article.articles);
+      return res.json().then(({ articles }) => {
+        return articles;
+      });
     }
   );
 }
