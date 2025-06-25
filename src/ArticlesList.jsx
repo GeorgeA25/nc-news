@@ -39,9 +39,13 @@ function ArticleList() {
     <main>
       <h2>Home Page</h2>
       <section className="article-list">
+        <ul>
         {articles.map((article) => (
-          <ArticleCard key={article.article_id} article={article} />
+         <li key={article.article_id}>
+          <ArticleCard  article={article} />
+        </li> 
         ))}
+        </ul>
       </section>
     </main>
   );
