@@ -57,7 +57,7 @@ export function patchArticleVotes(article_id, inc_votes) {
       if (!res.ok) {
         return Promise.reject({
           status: res.status,
-          msg: "Failed to fetch article by id",
+          msg: "Failed to patch votes",
         });
       }
       return res.json().then(({article}) => {
