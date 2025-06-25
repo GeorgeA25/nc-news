@@ -44,7 +44,23 @@ export function getArticleById(article_id) {
       });
     }   
 
-   
+  
+export function getUsers() {
+  return fetch("https://nc-news-api-aoq3.onrender.com/api/users").then(
+    (res) => {
+      if (!res.ok) {
+        return Promise.reject({
+          status: res.status,
+          msg: "Failed to fetch users",
+        });
+      }
+      return res.json().then(({ users }) => {
+        return users;
+      });
+    }
+  );
+}
+
 export function patchArticleVotes(article_id, inc_votes) {
   return fetch(`https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}`, {
     method: "PATCH",
