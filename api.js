@@ -14,8 +14,8 @@ export function getAllArticles() {
   );
 }
 
-export function getArticleById(id) {
-  return fetch(`https://nc-news-api-aoq3.onrender.com/api/articles/${id}`).then(
+export function getArticleById(article_id) {
+  return fetch(`https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}`).then(
     (res) => {
       if (!res.ok) {
         return Promise.reject({
@@ -23,6 +23,8 @@ export function getArticleById(id) {
           msg: "Failed to fetch article by id",
         });
       }
-      return res.json()
+      return res.json().then(({article}) => {
+        return article
+      })
       });
     }
