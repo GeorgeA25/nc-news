@@ -43,3 +43,25 @@ export function getArticleById(article_id) {
       })
       });
     }   
+
+   
+export function patchArticleVotes(article_id, inc_votes) {
+  return fetch(`https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({inc_votes})
+  }).then(
+    (res) => {
+      if (!res.ok) {
+        return Promise.reject({
+          status: res.status,
+          msg: "Failed to fetch article by id",
+        });
+      }
+      return res.json().then(({article}) => {
+        return article
+      })
+      });
+    } 
