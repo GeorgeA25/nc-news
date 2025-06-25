@@ -14,8 +14,9 @@ function ArticleDetails() {
             setLoading(true)
             setError(null)
             try{
-                const articleData = await getArticleById(id)
+                const articleData = await getArticleById(article_id)
                 setArticle(articleData)
+                console.log(articleData)
             } catch (error) {
         setError("Failed to load article");
       } finally {
@@ -51,16 +52,18 @@ const {
   } = article;
 
 return (
+    <section>
+    <h2>{title}</h2>
      <article className="article-card">
       <img src={article_img_url} alt={`Image for article titled "${title}"`} />
-      <h3>{title}</h3>
-      <p>{body}</p>
+      <p>Body: {body}</p>
       <p>Author: {author}</p>
       <p>Topic: {topic}</p>
       <p>Comments: {comment_count}</p>
       <p>Votes: {votes}</p>
       <p>Published: {formatDate(created_at)}</p>
       </article>
+     </section> 
 )
 
 }
