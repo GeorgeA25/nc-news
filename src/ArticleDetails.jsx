@@ -16,7 +16,6 @@ function ArticleDetails() {
             try{
                 const articleData = await getArticleById(article_id)
                 setArticle(articleData)
-                console.log(articleData)
             } catch (error) {
         setError("Failed to load article");
       } finally {
