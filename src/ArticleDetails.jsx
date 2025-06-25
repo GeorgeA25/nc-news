@@ -53,7 +53,6 @@ const {
 return (
     <section>
     <h2>{title}</h2>
-     <article className="article-card">
       <img src={article_img_url} alt={`Image for article titled "${title}"`} />
       <p>Body: {body}</p>
       <p>Author: {author}</p>
@@ -61,7 +60,6 @@ return (
       <p>Comments: {comment_count}</p>
       <p>Votes: {votes}</p>
       <p>Published: {formatDate(created_at)}</p>
-      </article>
      </section> 
 )
 
