@@ -5,7 +5,7 @@ body {
   box-sizing: border-box;
 }
 
-.article-list ul{
+.article-list ul {
   list-style: none;
   margin: 0;
   display: grid;
@@ -15,7 +15,7 @@ body {
   align-items: stretch;
 }
 
-.article-list li{
+.article-list li {
   list-style: none;
 }
 
@@ -24,7 +24,7 @@ body {
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #cf2626;
+  background-color: rgba(193, 17, 31);
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -69,7 +69,7 @@ h3 {
   text-align: center;
 }
 
-.comments-list ul{
+.comments-list ul {
   list-style: none;
   padding: 2rem 0;
   margin: 0;
@@ -79,7 +79,7 @@ h3 {
   align-items: stretch;
 }
 
-.comments-list li{
+.comments-list li {
   list-style: none;
   gap: 1.5rem;
 }
@@ -89,7 +89,7 @@ h3 {
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #bd0f0f;
+  background-color: rgba(193, 17, 31);
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -119,7 +119,7 @@ h3 {
   background-color: rgba(0, 0, 255, 0.445);
   display: flex;
   flex-direction: column;
-  text-align: left
+  text-align: left;
 }
 
 .comment-form-section {
@@ -130,5 +130,27 @@ h3 {
   background-color: rgba(96, 4, 243, 0.445);
   display: flex;
   flex-direction: column;
-  text-align: left
+  text-align: left;
+}
+
+.comment-card button {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(137, 17, 193);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.user-selector {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgb(202, 42, 21);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
