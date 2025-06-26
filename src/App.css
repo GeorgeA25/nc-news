@@ -121,3 +121,14 @@ h3 {
   flex-direction: column;
   text-align: left
 }
+
+.comment-form-section {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(96, 4, 243, 0.445);
+  display: flex;
+  flex-direction: column;
+  text-align: left
+}
