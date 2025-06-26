@@ -1,7 +1,7 @@
 import { formatDate } from "../utils/utils";
 
 
-function CommentCard({ comment }) {
+function CommentCard({ comment, onDelete, deleting, selectedUser }) {
   const {
     author,
     body,
@@ -9,6 +9,7 @@ function CommentCard({ comment }) {
     created_at
   } = comment;
 
+const isAuthor = comment.author === selectedUser
 
 return (
     <article className="comment-card">
@@ -16,6 +17,11 @@ return (
       <p>By: {author}</p>
       <p>Votes: {votes}</p>
       <p>Posted: {formatDate(created_at)}</p>
+       {isAuthor && (
+        <button onClick={() => onDelete(comment.comment_id)} disabled={deleting}>
+          {deleting ? "Deleting ..." :"Delete"}
+        </button>
+       )}
     </article>
   );
 }
