@@ -81,3 +81,27 @@ export function patchArticleVotes(article_id, inc_votes) {
       })
       });
     } 
+
+
+export function postCommentToArticle(article_id, comment) {
+  return fetch(`https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"},
+      body: JSON.stringify(
+        {username: "tickle122",
+          body: comment
+        })
+  }).then(
+    (res) => {
+      if (!res.ok) {
+        return Promise.reject({
+          status: res.status,
+          msg: "Failed to post comment",
+        });
+      }
+      return res.json().then(({comment}) => {
+        return comment
+      })
+      });
+    }
