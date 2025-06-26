@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getTopics } from "../api";
+import TopicCard from "./TopicCard";
 
 function TopicsList() {
   const [topics, setTopics] = useState([]);
@@ -40,10 +41,7 @@ function TopicsList() {
       <section className="topics-list">
         <ul>
           {topics.map((topic) => (
-            <li key={topic.slug}>
-              <h3>{topic.slug}</h3>
-              <p>{topic.description}</p>
-            </li>
+            <TopicCard key={topic.slug} topic={topic} />
           ))}
         </ul>
       </section>
