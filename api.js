@@ -106,3 +106,18 @@ export function postCommentToArticle(article_id, comment) {
       })
       });
     }
+
+export function deleteCommentById(comment_id) {
+  return fetch(`https://nc-news-api-aoq3.onrender.com/api/comments/${comment_id}`, {
+    method: "DELETE"
+   }) .then(
+    (res) => {
+      if (!res.ok) {
+        return Promise.reject({
+          status: res.status,
+          msg: "Failed to delete comment",
+        });
+      }
+      return true
+      })
+}
