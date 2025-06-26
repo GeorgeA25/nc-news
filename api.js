@@ -78,6 +78,22 @@ export function getTopics() {
   );
 }
 
+export function getArticleByTopic(topic_slug) {
+  return fetch(
+    `https://nc-news-api-aoq3.onrender.com/api/articles?topic=${topic_slug}`
+  ).then((res) => {
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        msg: "Failed to fetch articles by topic",
+      });
+    }
+    return res.json().then(({ articles }) => {
+      return articles;
+    });
+  });
+}
+
 export function patchArticleVotes(article_id, inc_votes) {
   return fetch(
     `https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}`,
