@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ArticleCard from "./ArticleCard";
 import { getTopics } from "../api";
 
 function TopicsList() {
