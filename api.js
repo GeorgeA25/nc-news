@@ -84,13 +84,14 @@ export function patchArticleVotes(article_id, inc_votes) {
 
 
 export function postCommentToArticle(article_id, comment) {
+  const {username, body} = comment
   return fetch(`https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"},
       body: JSON.stringify(
-        {username: "tickle122",
-          body: comment
+        {username,
+          body
         })
   }).then(
     (res) => {
