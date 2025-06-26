@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { postCommentToArticle } from "../api";
 
-function CommentForm({article_id, users, addComment}) {
+function CommentForm({article_id, users, addComment, onPostError}) {
     const [selectedUser, setSelectedUser] = useState("")
     const [commentInput, setCommentInput] = useState("")
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-
+try {
         const newComment = await postCommentToArticle(article_id, {username: selectedUser, body: commentInput})
         addComment(newComment)
         setCommentInput("")
-    }
-
+        setSelectedUser("")
+    } catch (error) {
+        onPostError("Failed to post comment")
+     }}
     const handleChange = (event) => {
         const {id, value} = event.target
         if(id === "user-select") {
@@ -38,6 +40,5 @@ function CommentForm({article_id, users, addComment}) {
         </form>
     )
 }
-
 
 export default CommentForm
