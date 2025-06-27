@@ -47,6 +47,12 @@ function TopicDetails() {
           ))}
         </section>
       </main>
+      <footer>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          {" "}
+          Back to Top
+        </button>
+      </footer>
     </>
   );
 }

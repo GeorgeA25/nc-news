@@ -36,16 +36,27 @@ function TopicsList() {
   }
 
   return (
-    <main>
-      <h2>Topics List Page</h2>
-      <section className="topics-list">
-        <ul>
-          {topics.map((topic) => (
-            <TopicCard key={topic.slug} topic={topic} />
-          ))}
-        </ul>
-      </section>
-    </main>
+    <>
+      <main>
+        <h2>Topics List Page</h2>
+        <section className="topics-list">
+          <ul>
+            {topics.map((topic) => (
+              <TopicCard key={topic.slug} topic={topic} />
+            ))}
+          </ul>
+        </section>
+      </main>
+      <footer>
+        <button
+          className="back-to-top-button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          {" "}
+          Back to Top
+        </button>
+      </footer>
+    </>
   );
 }
 export default TopicsList;

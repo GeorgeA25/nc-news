@@ -52,41 +52,52 @@ function ArticleList() {
   }
 
   return (
-    <main>
-      <h2>Home Page</h2>
-      <section>
-        <label htmlFor="sort-by">Sort by</label>
-        <select
-          id="sort-by"
-          value={sortBy}
-          onChange={(event) => handleSortByChange(event.target.value)}
+    <>
+      <main>
+        <h2>Home Page</h2>
+        <section>
+          <label htmlFor="sort-by">Sort by</label>
+          <select
+            id="sort-by"
+            value={sortBy}
+            onChange={(event) => handleSortByChange(event.target.value)}
+          >
+            <option value="created_at">Date</option>
+            <option value="comment_count">Comment Count</option>
+            <option value="votes">Votes</option>
+          </select>
+        </section>
+        <section>
+          <label htmlFor="order">Order</label>
+          <select
+            id="order"
+            value={order}
+            onChange={(event) => handleOrderChange(event.target.value)}
+          >
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </section>
+        <section className="article-list">
+          <ul>
+            {articles.map((article) => (
+              <li key={article.article_id}>
+                <ArticleCard article={article} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+      <footer>
+        <button
+          className="back-to-top-button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          <option value="created_at">Date</option>
-          <option value="comment_count">Comment Count</option>
-          <option value="votes">Votes</option>
-        </select>
-      </section>
-      <section>
-        <label htmlFor="order">Order</label>
-        <select
-          id="order"
-          value={order}
-          onChange={(event) => handleOrderChange(event.target.value)}
-        >
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-      </section>
-      <section className="article-list">
-        <ul>
-          {articles.map((article) => (
-            <li key={article.article_id}>
-              <ArticleCard article={article} />
-            </li>
-          ))}
-        </ul>
-      </section>
-    </main>
+          {" "}
+          Back to Top
+        </button>
+      </footer>
+    </>
   );
 }
 export default ArticleList;
