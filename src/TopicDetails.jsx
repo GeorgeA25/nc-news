@@ -34,7 +34,12 @@ function TopicDetails() {
   }
 
   if (!articles.length) {
-    return <p>No article found on topic {slug}</p>;
+    return (
+      <p>
+        {" "}
+        Topic "{slug}"No article found on topic {slug}
+      </p>
+    );
   }
 
   return (
@@ -48,8 +53,10 @@ function TopicDetails() {
         </section>
       </main>
       <footer>
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          {" "}
+        <button
+          className="back-to-top-button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
           Back to Top
         </button>
       </footer>
