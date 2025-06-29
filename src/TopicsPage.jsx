@@ -52,7 +52,6 @@ function TopicsList() {
           className="back-to-top-button"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          {" "}
           Back to Top
         </button>
       </footer>
