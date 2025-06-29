@@ -80,7 +80,7 @@ export function getTopics() {
 
 export function getArticleByTopic(topic_slug) {
   return fetch(
-    `https://nc-news-api-aoq3.onrender.com/api/articles?topics=${topic_slug}`
+    `https://nc-news-api-aoq3.onrender.com/api/articles?topic=${topic_slug}`
   ).then((res) => {
     if (!res.ok) {
       return Promise.reject({
