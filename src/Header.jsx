@@ -6,8 +6,14 @@ function Header() {
       <h1>Northcoders News</h1>
       <nav className="nav">
         <ul className="nav-list">
-          <Link to="/"> Home</Link>
-          <Link to="/topics"> Topics</Link>
+          <Link className="link-names" to="/">
+            {" "}
+            Home
+          </Link>
+          <Link className="link-names" to="/topics">
+            {" "}
+            Topics
+          </Link>
         </ul>
       </nav>
     </header>

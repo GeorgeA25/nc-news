@@ -55,10 +55,33 @@ body {
 
 .site-header {
   text-align: center;
+  padding: 1.5rem 1rem;
+  color: rgb(255, 255, 255);
+}
+
+.site-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .nav {
+  display: flex;
+  width: 49%;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  gap: 10rem;
   text-align: center;
+}
+
+.nav-link {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.link-names {
+  color: #ddd;
 }
 
 h2 {
@@ -67,6 +90,7 @@ h2 {
 
 h3 {
   text-align: center;
+  color: ghostwhite;
 }
 
 .comments-list ul {
