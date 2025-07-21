@@ -67,7 +67,10 @@ function CommentManager({ article_id }) {
   };
 
   const handleCommentPostError = (error) => {
-    setCommentPostErrorMessage(error);
+    setCommentPostErrorMessage(
+      "Failed to post comment. Please try again",
+      error
+    );
     setCommentPostSuccessMessage(null);
     setTimeout(() => setCommentPostErrorMessage(null), 5000);
   };
@@ -95,39 +98,7 @@ function CommentManager({ article_id }) {
   return (
     <>
       <section>
-        <h3>Comments</h3>
-        <section className="post-and-error-messages">
-          {commentPostSuccessMessage && <p>{commentPostSuccessMessage}</p>}
-          {commentPostErrorMessage && <p>{commentPostErrorMessage}</p>}
-          {deleteSuccessMessage && <p>{deleteSuccessMessage}</p>}
-          {deleteErrorMessage && <p>{deleteErrorMessage}</p>}
-        </section>
-        {commentsLoading ? (
-          <p> Loading comments ...</p>
-        ) : commentsError ? (
-          <p>{commentsError}</p>
-        ) : comments.length === 0 ? (
-          <p>No comments yet </p>
-        ) : (
-          <section className="comments-list">
-            <ul>
-              {comments.map((comment) => (
-                <li key={comment.comment_id}>
-                  <CommentCard
-                    comment={comment}
-                    onDelete={handleDeleteComment}
-                    deleting={deleteLoading === comment.comment_id}
-                    selectedUser={selectedUser}
-                  />
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-        <section className="user-loading-error">
-          {userLoading && <p>Loading users ...</p>}
-          {userLoadError && <p>{userLoadError}</p>}
-        </section>
+        <h3>Post a comment</h3>
         <section className="user-selector">
           <label htmlFor="user-select">Choose User</label>
           <select
@@ -158,6 +129,41 @@ function CommentManager({ article_id }) {
               setSelectedUser={setSelectedUser}
             />
           )}
+        </section>{" "}
+        <section className="post-and-error-messages">
+          {commentPostSuccessMessage && <p>{commentPostSuccessMessage}</p>}
+          {commentPostErrorMessage && <p>{commentPostErrorMessage}</p>}
+          {deleteSuccessMessage && <p>{deleteSuccessMessage}</p>}
+          {deleteErrorMessage && <p>{deleteErrorMessage}</p>}
+        </section>
+        {commentsLoading ? (
+          <p> Loading comments ...</p>
+        ) : commentsError ? (
+          <p>{commentsError}</p>
+        ) : comments.length === 0 ? (
+          <p>No comments yet </p>
+        ) : (
+          <>
+            <h3>Comments </h3>
+            <section className="comments-list">
+              <ul>
+                {comments.map((comment) => (
+                  <li key={comment.comment_id}>
+                    <CommentCard
+                      comment={comment}
+                      onDelete={handleDeleteComment}
+                      deleting={deleteLoading === comment.comment_id}
+                      selectedUser={selectedUser}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </>
+        )}
+        <section className="user-loading-error">
+          {userLoading && <p>Loading users ...</p>}
+          {userLoadError && <p>{userLoadError}</p>}
         </section>
       </section>
     </>
