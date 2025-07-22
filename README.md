@@ -1,6 +1,6 @@
 NC News (Frontend)
 
-A Reddit-style news web application built with React and Vite that consumes a separate NC News API. Browse articles, filter by topics, vote, and comment—all in a responsive UI.
+A web application that lets a user view a list of articles with initial details of the article. Upon selecting a article you'll be navigated to a page where the selected article will load with more info and also an option to post a comment, delete a comment, update a comment posted and also to vote on the article. Also this app has a topics page listing the topics of articles to read an when clicking a specific topic you'll be navigated to a page of articles based upon the topic you've chosen. 
 
 ---
 
