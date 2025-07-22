@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { getArticleById, patchArticleVotes } from "../api";
+import { getArticleById, patchArticleVotes } from "../api/api";
 import { useEffect, useState } from "react";
-import { formatDate } from "../utils/utils";
-import CommentManager from "./CommentsManager";
+import { formatDate } from "../../utils/utils";
+import CommentManager from "../Comments/CommentsManager";
 
 function ArticleDetails() {
   const [article, setArticle] = useState(null);

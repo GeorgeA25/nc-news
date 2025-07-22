@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "./Header";
-import ArticleList from "./ArticlesList";
-import ArticleDetails from "./ArticleDetails";
-import TopicsList from "./TopicsPage";
-import TopicDetails from "./TopicDetails";
-import NotFound from "./NotFound";
-import "./App.css";
+import ArticleList from "./Pages/ArticlesList";
+import ArticleDetails from "./Pages/ArticleDetails";
+import TopicsList from "./Pages/TopicsPage";
+import TopicDetails from "./Pages/TopicDetails";
+import NotFound from "./Pages/NotFound";
+import "./Styling/App.css";
 
 function App() {
   return (

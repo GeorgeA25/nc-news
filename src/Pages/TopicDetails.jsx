@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { getArticleByTopic } from "../api";
+import { getArticleByTopic } from "../api/api";
 import { useEffect, useState } from "react";
-import ArticleCard from "./ArticleCard";
+import ArticleCard from "../Cards/ArticleCard";
 
 function TopicDetails() {
   const [articles, setArticles] = useState([]);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getTopics } from "../api";
-import TopicCard from "./TopicCard";
+import { getTopics } from "../api/api";
+import TopicCard from "../Cards/TopicCard";
 
 function TopicsList() {
   const [topics, setTopics] = useState([]);

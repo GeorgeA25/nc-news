@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import CommentCard from "./CommentCard";
-import { deleteCommentById, getCommentsById, getUsers } from "../api";
+import CommentCard from "../Cards/CommentCard";
+import { deleteCommentById, getCommentsById, getUsers } from "../api/api";
 import CommentForm from "./CommentForm";
 
 function CommentManager({ article_id }) {
