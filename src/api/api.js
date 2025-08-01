@@ -110,6 +110,22 @@ export function getEmojis() {
   );
 }
 
+export function getEmojiReactionsByArticleId(article_id) {
+  return fetch(
+    `https://nc-news-api-aoq3.onrender.com/api/emoji-reactions/${article_id}`
+  ).then((res) => {
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        msg: "Failed to fetch emojis by id",
+      });
+    }
+    return res.json().then(({ reactions }) => {
+      return reactions.length;
+    });
+  });
+}
+
 export function patchArticleVotes(article_id, inc_votes) {
   return fetch(
     `https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}`,
