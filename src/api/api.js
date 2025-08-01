@@ -94,6 +94,22 @@ export function getArticleByTopic(topic_slug) {
   });
 }
 
+export function getEmojis() {
+  return fetch(`https://nc-news-api-aoq3.onrender.com/api/emojis`).then(
+    (res) => {
+      if (!res.ok) {
+        return Promise.reject({
+          status: res.status,
+          msg: "Failed to fetch emojis",
+        });
+      }
+      return res.json().then(({ emojis }) => {
+        return emojis;
+      });
+    }
+  );
+}
+
 export function patchArticleVotes(article_id, inc_votes) {
   return fetch(
     `https://nc-news-api-aoq3.onrender.com/api/articles/${article_id}`,
@@ -141,6 +157,32 @@ export function postCommentToArticle(article_id, comment) {
   });
 }
 
+export function postEmojiReactions(emojiId, username, articleId) {
+  return fetch(`https://nc-news-api-aoq3.onrender.com/api/emoji-reactions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      emoji_id: emojiId,
+      username: username,
+      article_id: articleId,
+    }),
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        msg: "Failed to post emoji",
+      });
+    }
+    return res
+      .json()
+      .then(({ emoji_reactions, emoji_id, username, article_id }) => {
+        return { emoji_reactions, emoji_id, username, article_id };
+      });
+  });
+}
+
 export function deleteCommentById(comment_id) {
   return fetch(
     `https://nc-news-api-aoq3.onrender.com/api/comments/${comment_id}`,
@@ -152,6 +194,23 @@ export function deleteCommentById(comment_id) {
       return Promise.reject({
         status: res.status,
         msg: "Failed to delete comment",
+      });
+    }
+    return true;
+  });
+}
+
+export function deleteEmojiReactions(emojiId, username, articleId) {
+  return fetch(
+    `https://nc-news-api-aoq3.onrender.com/api/emoji-reactions/${emojiId}/${username}/${articleId}`,
+    {
+      method: "DELETE",
+    }
+  ).then((res) => {
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        msg: "Failed to delete emoji",
       });
     }
     return true;
