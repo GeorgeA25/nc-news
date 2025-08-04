@@ -1,7 +1,7 @@
 import { formatDate } from "../../utils/utils";
 import { Link } from "react-router-dom";
 
-function ArticleCard({ article }) {
+function ArticleCard({ article, emojiCount }) {
   const {
     article_id,
     title,
@@ -26,6 +26,7 @@ function ArticleCard({ article }) {
         <p>Comments: {comment_count}</p>
         <p>Votes: {votes}</p>
         <p>Published: {formatDate(created_at)}</p>
+        <p>Reactions: {emojiCount}</p>
       </article>
     </Link>
   );

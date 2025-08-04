@@ -1,4 +1,4 @@
-import { getAllArticles } from "../api/api";
+import { getAllArticles, getEmojiReactionsByArticleId } from "../api/api";
 import { useState, useEffect } from "react";
 import ArticleCard from "../Cards/ArticleCard";
 import { useSearchParams } from "react-router-dom";
@@ -7,11 +7,13 @@ function ArticleList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [emojiReactions, setEmojiReactions] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortBy, setSortBy] = useState(
     () => searchParams.get("sort_by") || "created_at"
   );
   const [order, setOrder] = useState(() => searchParams.get("order") || "desc");
+  const [articleId, setArticleId] = useState(searchParams.get("article_id"));
 
   useEffect(() => {
     async function fetchArticles() {
@@ -20,6 +22,14 @@ function ArticleList() {
       try {
         const articles = await getAllArticles(sortBy, order);
         setArticles(articles);
+        const emojis = {};
+        for (const article of articles) {
+          const emojiReactions = await getEmojiReactionsByArticleId(
+            article.article_id
+          );
+          emojis[article.article_id] = emojiReactions;
+        }
+        setEmojiReactions(emojis);
       } catch (error) {
         setError("Article not found");
       } finally {
@@ -84,7 +94,10 @@ function ArticleList() {
           <ul>
             {articles.map((article) => (
               <li key={article.article_id}>
-                <ArticleCard article={article} />
+                <ArticleCard
+                  article={article}
+                  emojiCount={emojiReactions[article.article_id]}
+                />
               </li>
             ))}
           </ul>

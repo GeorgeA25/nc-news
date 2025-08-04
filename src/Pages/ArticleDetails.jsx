@@ -1,5 +1,10 @@
 import { useParams } from "react-router-dom";
-import { getArticleById, patchArticleVotes } from "../api/api";
+import {
+  getArticleById,
+  patchArticleVotes,
+  getEmojis,
+  postEmojiReactions,
+} from "../api/api";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../utils/utils";
 import CommentManager from "../Comments/CommentsManager";
@@ -13,6 +18,11 @@ function ArticleDetails() {
   const [votesCountError, setVotesCountError] = useState(null);
   const [votesSuccessMessage, setVotesSuccessMessage] = useState(null);
   const [isVoteLoading, setIsVoteLoading] = useState(false);
+  const [emojiList, setEmojiList] = useState([]);
+  const [emojiError, setEmojiError] = useState(null);
+  const [isEmojiLoading, setIsEmojiLoading] = useState(false);
+  const [emojiMessage, setEmojiMessage] = useState("");
+  const [selectedUser, setSelctedUser] = useState("");
 
   useEffect(() => {
     async function fetchArticleById() {
@@ -30,6 +40,37 @@ function ArticleDetails() {
     }
     fetchArticleById();
   }, [article_id]);
+
+  useEffect(() => {
+    async function fetchEmojis() {
+      try {
+        const emojis = await getEmojis();
+        setEmojiList(emojis);
+      } catch (error) {
+        setEmojiError("Failed to load emoji list");
+      }
+    }
+    fetchEmojis();
+  }, []);
+
+  const handleEmojiReactions = async (emojiId) => {
+    if (isEmojiLoading) return;
+
+    setIsEmojiLoading(true);
+    setEmojiError(null);
+    setEmojiMessage(null);
+
+    try {
+      await postEmojiReactions(emojiId, username, article_id);
+      setEmojiMessage("Your emoji reaction was posted");
+      setTimeout(() => setEmojiMessage(null), 5000);
+    } catch (error) {
+      setEmojiError("Failed to post your emoji reaction, Please try again");
+      setTimeout(() => setEmojiError(null), 5000);
+    } finally {
+      setIsEmojiLoading(false);
+    }
+  };
 
   if (articleLoading) {
     return <p>Loading ...</p>;
@@ -96,6 +137,24 @@ function ArticleDetails() {
         {votesSuccessMessage && (
           <p className="success">{votesSuccessMessage}</p>
         )}
+        <section className="emoji-reactions">
+          <h3>React with an emoji</h3>
+          {emojiError && <p>{emojiError}</p>}
+          {emojiMessage && <p>{emojiMessage}</p>}
+
+          <div className="emoji-buttons">
+            {emojiList.map(({ emoji_id, emoji_symbol }) => (
+              <button
+                key={emoji_id}
+                disabled={isEmojiLoading}
+                onClick={() => handleEmojiReactions(emoji_id)}
+                title={emoji_symbol}
+              >
+                {emoji_symbol}
+              </button>
+            ))}
+          </div>
+        </section>
         <p>Published: {formatDate(created_at)}</p>
       </section>
       <section>
