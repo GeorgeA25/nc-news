@@ -4,6 +4,8 @@ import {
   patchArticleVotes,
   getEmojis,
   postEmojiReactions,
+  getEmojiReactionsByArticleId,
+  getUsers,
 } from "../api/api";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../utils/utils";
@@ -18,11 +20,14 @@ function ArticleDetails() {
   const [votesCountError, setVotesCountError] = useState(null);
   const [votesSuccessMessage, setVotesSuccessMessage] = useState(null);
   const [isVoteLoading, setIsVoteLoading] = useState(false);
-  const [emojiList, setEmojiList] = useState([]);
+  const [emojis, setEmojs] = useState([]);
   const [emojiError, setEmojiError] = useState(null);
   const [isEmojiLoading, setIsEmojiLoading] = useState(false);
   const [emojiMessage, setEmojiMessage] = useState("");
-  const [selectedUser, setSelctedUser] = useState("");
+  const [selectUser, setSelectUser] = useState("");
+  const [users, setUsers] = useState([]);
+  const [reactions, setReactions] = useState([]);
+  const [userError, setUserError] = useState(null);
 
   useEffect(() => {
     async function fetchArticleById() {
@@ -45,23 +50,51 @@ function ArticleDetails() {
     async function fetchEmojis() {
       try {
         const emojis = await getEmojis();
-        setEmojiList(emojis);
+        setEmojs(emojis);
+
+        const reaction = await getEmojiReactionsByArticleId(article_id);
+        setReactions(reaction);
       } catch (error) {
         setEmojiError("Failed to load emoji list");
       }
     }
     fetchEmojis();
+  }, [article_id]);
+
+  useEffect(() => {
+    async function fecthUsers() {
+      try {
+        const fetchedUsers = await getUsers();
+        setUsers(fetchedUsers);
+      } catch (error) {
+        setUserError("Failed to load user");
+      }
+    }
+    fecthUsers();
   }, []);
 
   const handleEmojiReactions = async (emojiId) => {
     if (isEmojiLoading) return;
+
+    if (!selectUser) {
+      setEmojiMessage("Please select a user before reacting with an emoji");
+      return;
+    }
 
     setIsEmojiLoading(true);
     setEmojiError(null);
     setEmojiMessage(null);
 
     try {
-      await postEmojiReactions(emojiId, username, article_id);
+      await postEmojiReactions(emojiId, selectUser, article_id);
+
+      const newReaction = {
+        emoji_id: emojiId,
+        username: selectUser,
+        article_id: article_id,
+      };
+
+      setReactions((currentReactions) => [...currentReactions, newReaction]);
       setEmojiMessage("Your emoji reaction was posted");
       setTimeout(() => setEmojiMessage(null), 5000);
     } catch (error) {
@@ -137,22 +170,66 @@ function ArticleDetails() {
         {votesSuccessMessage && (
           <p className="success">{votesSuccessMessage}</p>
         )}
+        <section className="user-select">
+          <h4>Select a user</h4>
+          <select
+            value={selectUser}
+            onChange={(event) => setSelectUser(event.target.value)}
+            disabled={isEmojiLoading}
+          >
+            <option value=""> Select a user</option>
+            {users.map((user) => {
+              return (
+                <option key={user.username} value={user.username}>
+                  {user.username}
+                </option>
+              );
+            })}
+          </select>
+        </section>
         <section className="emoji-reactions">
           <h3>React with an emoji</h3>
           {emojiError && <p>{emojiError}</p>}
           {emojiMessage && <p>{emojiMessage}</p>}
 
           <div className="emoji-buttons">
-            {emojiList.map(({ emoji_id, emoji_symbol }) => (
+            {emojis.map(({ emoji_id, emoji_symbol }) => (
               <button
                 key={emoji_id}
-                disabled={isEmojiLoading}
+                disabled={isEmojiLoading || !selectUser}
                 onClick={() => handleEmojiReactions(emoji_id)}
                 title={emoji_symbol}
               >
                 {emoji_symbol}
               </button>
             ))}
+          </div>
+        </section>
+        <section className="display-reactions">
+          <h4>Reactions</h4>
+          <div className="reaction-list">
+            {reactions && reactions.length > 0 ? (
+              reactions.map(({ username, emoji_id, emoji_reactions_id }) => {
+                console.log("Reaction data: ", {
+                  username,
+                  emoji_id,
+                  emoji_reactions_id,
+                });
+                console.log(emojis);
+                const emoji = emojis.find(
+                  (emoji) => emoji.emoji_id === emoji_id
+                );
+                const symbol = emoji ? emoji.emoji_symbol : "?";
+                return (
+                  <div key={`${emoji_reactions_id}`}>
+                    <span>{symbol}</span>
+                    <span>{username}</span>
+                  </div>
+                );
+              })
+            ) : (
+              <p>No Reactions yet</p>
+            )}
           </div>
         </section>
         <p>Published: {formatDate(created_at)}</p>
