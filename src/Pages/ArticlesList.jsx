@@ -96,7 +96,7 @@ function ArticleList() {
               <li key={article.article_id}>
                 <ArticleCard
                   article={article}
-                  emojiCount={emojiReactions[article.article_id]}
+                  emojiCount={emojiReactions[article.article_id].length}
                 />
               </li>
             ))}
