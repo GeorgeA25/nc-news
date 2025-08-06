@@ -121,7 +121,7 @@ export function getEmojiReactionsByArticleId(article_id) {
       });
     }
     return res.json().then(({ reactions }) => {
-      return reactions.length;
+      return reactions;
     });
   });
 }
