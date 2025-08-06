@@ -51,14 +51,23 @@ function ArticleDetails() {
       try {
         const emojis = await getEmojis();
         setEmojs(emojis);
-
-        const reaction = await getEmojiReactionsByArticleId(article_id);
-        setReactions(reaction);
       } catch (error) {
         setEmojiError("Failed to load emoji list");
       }
     }
     fetchEmojis();
+  }, []);
+
+  useEffect(() => {
+    async function fetchReactions() {
+      try {
+        const response = await getEmojiReactionsByArticleId(article_id);
+        setReactions(response);
+      } catch (error) {
+        setEmojiError("failed to load reactions");
+      }
+    }
+    fetchReactions();
   }, [article_id]);
 
   useEffect(() => {
@@ -208,28 +217,14 @@ function ArticleDetails() {
         <section className="display-reactions">
           <h4>Reactions</h4>
           <div className="reaction-list">
-            {reactions && reactions.length > 0 ? (
-              reactions.map(({ username, emoji_id, emoji_reactions_id }) => {
-                console.log("Reaction data: ", {
-                  username,
-                  emoji_id,
-                  emoji_reactions_id,
-                });
-                console.log(emojis);
-                const emoji = emojis.find(
-                  (emoji) => emoji.emoji_id === emoji_id
-                );
-                const symbol = emoji ? emoji.emoji_symbol : "?";
+            {Array.isArray(reactions) &&
+              reactions.map(({ emoji_reactions_id, emoji_id, username }) => {
                 return (
                   <div key={`${emoji_reactions_id}`}>
-                    <span>{symbol}</span>
-                    <span>{username}</span>
+                    {emoji_id} by {username}
                   </div>
                 );
-              })
-            ) : (
-              <p>No Reactions yet</p>
-            )}
+              })}
           </div>
         </section>
         <p>Published: {formatDate(created_at)}</p>
