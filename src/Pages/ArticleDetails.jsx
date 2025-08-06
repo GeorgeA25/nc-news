@@ -20,7 +20,7 @@ function ArticleDetails() {
   const [votesCountError, setVotesCountError] = useState(null);
   const [votesSuccessMessage, setVotesSuccessMessage] = useState(null);
   const [isVoteLoading, setIsVoteLoading] = useState(false);
-  const [emojis, setEmojs] = useState([]);
+  const [emojis, setEmojis] = useState([]);
   const [emojiError, setEmojiError] = useState(null);
   const [isEmojiLoading, setIsEmojiLoading] = useState(false);
   const [emojiMessage, setEmojiMessage] = useState("");
@@ -50,7 +50,7 @@ function ArticleDetails() {
     async function fetchEmojis() {
       try {
         const emojis = await getEmojis();
-        setEmojs(emojis);
+        setEmojis(emojis);
       } catch (error) {
         setEmojiError("Failed to load emoji list");
       }
@@ -71,7 +71,7 @@ function ArticleDetails() {
   }, [article_id]);
 
   useEffect(() => {
-    async function fecthUsers() {
+    async function fetchUsers() {
       try {
         const fetchedUsers = await getUsers();
         setUsers(fetchedUsers);
@@ -79,7 +79,7 @@ function ArticleDetails() {
         setUserError("Failed to load user");
       }
     }
-    fecthUsers();
+    fetchUsers();
   }, []);
 
   const handleEmojiReactions = async (emojiId) => {
@@ -217,14 +217,16 @@ function ArticleDetails() {
         <section className="display-reactions">
           <h4>Reactions</h4>
           <div className="reaction-list">
-            {Array.isArray(reactions) &&
-              reactions.map(({ emoji_reactions_id, emoji_id, username }) => {
-                return (
-                  <div key={`${emoji_reactions_id}`}>
-                    {emoji_id} by {username}
-                  </div>
-                );
-              })}
+            {reactions.map((reaction) => {
+              const emoji = emojis.find(
+                (emoji) => emoji.emoji_id === reaction.emoji_id
+              );
+              return (
+                <p key={reaction.emoji_reactions_id}>
+                  {emoji.emoji_symbol} by {reaction.username}
+                </p>
+              );
+            })}
           </div>
         </section>
         <p>Published: {formatDate(created_at)}</p>
