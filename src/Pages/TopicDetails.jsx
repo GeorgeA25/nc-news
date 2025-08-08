@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
-import { getArticleByTopic } from "../api/api";
+import { getArticleByTopic, getEmojiReactionsByArticleId } from "../api/api";
 import { useEffect, useState } from "react";
 import ArticleCard from "../Cards/ArticleCard";
 
 function TopicDetails() {
   const [articles, setArticles] = useState([]);
+  const [emojiReactions, setEmojiReactions] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { slug } = useParams();
@@ -16,6 +17,14 @@ function TopicDetails() {
       try {
         const articleData = await getArticleByTopic(slug);
         setArticles(articleData);
+        const emojis = {};
+        for (const article of articleData) {
+          const emojiReactions = await getEmojiReactionsByArticleId(
+            article.article_id
+          );
+          emojis[article.article_id] = emojiReactions;
+        }
+        setEmojiReactions(emojis);
       } catch (error) {
         setError("Failed to load articles for this topic");
       } finally {
@@ -48,7 +57,11 @@ function TopicDetails() {
         <h2>Articles on {slug}</h2>
         <section className="article-list">
           {articles.map((article) => (
-            <ArticleCard key={article.article_id} article={article} />
+            <ArticleCard
+              key={article.article_id}
+              article={article}
+              emojiCount={emojiReactions[article.article_id].length}
+            />
           ))}
         </section>
       </main>
