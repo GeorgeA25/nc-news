@@ -6,6 +6,7 @@ import {
   postEmojiReactions,
   getEmojiReactionsByArticleId,
   getUsers,
+  deleteEmojiReactions,
 } from "../api/api";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../utils/utils";
@@ -108,6 +109,33 @@ function ArticleDetails() {
       setTimeout(() => setEmojiMessage(null), 5000);
     } catch (error) {
       setEmojiError("Failed to post your emoji reaction, Please try again");
+      setTimeout(() => setEmojiError(null), 5000);
+    } finally {
+      setIsEmojiLoading(false);
+    }
+  };
+
+  const handleDeleteReactions = async (emoji_id, username) => {
+    setIsEmojiLoading(true);
+    setEmojiError(null);
+    setEmojiMessage(null);
+    try {
+      await deleteEmojiReactions(emoji_id, username, article_id);
+
+      setReactions((currentReactions) =>
+        currentReactions.filter(
+          (reaction) =>
+            !(
+              reaction.emoji_id === emoji_id &&
+              reaction.username === username &&
+              reaction.article_id === article_id
+            )
+        )
+      );
+      setEmojiMessage("Your emoji reaction was deleted");
+      setTimeout(() => setEmojiMessage(null), 5000);
+    } catch {
+      setEmojiError("Failed to delete your emoji reaction, Please try again");
       setTimeout(() => setEmojiError(null), 5000);
     } finally {
       setIsEmojiLoading(false);
@@ -221,9 +249,26 @@ function ArticleDetails() {
               const emoji = emojis.find(
                 (emoji) => emoji.emoji_id === reaction.emoji_id
               );
+              if (!emoji) {
+                return null;
+              }
               return (
                 <p key={reaction.emoji_reactions_id}>
                   {emoji.emoji_symbol} by {reaction.username}
+                  {reaction.username === selectUser && (
+                    <button
+                      onClick={() =>
+                        handleDeleteReactions(
+                          reaction.emoji_id,
+                          reaction.username,
+                          reaction.article_id
+                        )
+                      }
+                      className="delete-reactions"
+                    >
+                      ❌
+                    </button>
+                  )}
                 </p>
               );
             })}
