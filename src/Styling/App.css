@@ -232,3 +232,17 @@ h3 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: rgb(180, 62, 8);
 }
+
+.delete-reactions {
+  margin-left: 1rem;
+  background: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 0.02rem solid #e74c3c;
+  border-radius: 0.5rem;
+  background-color: #070000;
+  margin-left: 1rem;
+}
