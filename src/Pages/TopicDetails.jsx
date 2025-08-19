@@ -55,15 +55,17 @@ function TopicDetails() {
     <>
       <main>
         <h2>Articles on {slug}</h2>
-        <section className="article-list">
-          {articles.map((article) => (
-            <ArticleCard
-              key={article.article_id}
-              article={article}
-              emojiCount={emojiReactions[article.article_id].length}
-            />
-          ))}
-        </section>
+        <div>
+          <section className="topic-articles-list">
+            {articles.map((article) => (
+              <ArticleCard
+                key={article.article_id}
+                article={article}
+                emojiCount={emojiReactions[article.article_id].length}
+              />
+            ))}
+          </section>
+        </div>
       </main>
       <footer>
         <button

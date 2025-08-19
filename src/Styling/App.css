@@ -15,10 +15,6 @@ body {
   align-items: stretch;
 }
 
-.article-list li {
-  list-style: none;
-}
-
 .article-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -103,11 +99,6 @@ h3 {
   align-items: stretch;
 }
 
-.comments-list li {
-  list-style: none;
-  gap: 1.5rem;
-}
-
 .comment-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -187,18 +178,12 @@ h3 {
   text-align: left;
 }
 
-.topic-list ul {
-  list-style: none;
+.topics-list {
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 2rem 0;
-  align-items: stretch;
-}
-
-.topic-list li {
-  list-style: none;
+  justify-content: space-between;
+  padding: 0.5rem;
+  align-items: center;
 }
 
 .topic-card h3 {
@@ -245,4 +230,50 @@ h3 {
   border-radius: 0.5rem;
   background-color: #070000;
   margin-left: 1rem;
+}
+
+.up-vote-button {
+  margin-left: 1rem;
+  background: transparent;
+  border: none;
+  color: rgb(247, 241, 241);
+  cursor: pointer;
+  display: inline-block;
+  padding: 1rem 1rem;
+  border: 0.02rem solid green;
+  border-radius: 0.5rem;
+  background-color: #070000;
+  margin: 0.5rem;
+  width: fit-content;
+}
+
+.down-vote-button {
+  margin-left: 1rem;
+  background: transparent;
+  border: none;
+  color: rgb(247, 241, 241);
+  cursor: pointer;
+  display: inline-block;
+  padding: 1rem 1rem;
+  border: 0.02rem solid red;
+  border-radius: 0.5rem;
+  background-color: #070000;
+  margin: 0.5rem;
+  width: fit-content;
+}
+
+.emoji-buttons {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.topic-articles-list {
+  list-style: none;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  align-items: stretch;
 }

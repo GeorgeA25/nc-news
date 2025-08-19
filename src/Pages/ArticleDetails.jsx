@@ -197,10 +197,18 @@ function ArticleDetails() {
         <p>Topic: {topic}</p>
         <p>Comments: {comment_count}</p>
         <p>Votes: {votesCount}</p>
-        <button disabled={isVoteLoading} onClick={() => handleVote(1)}>
+        <button
+          disabled={isVoteLoading}
+          onClick={() => handleVote(1)}
+          className="up-vote-button"
+        >
           Upvote
         </button>
-        <button disabled={isVoteLoading} onClick={() => handleVote(-1)}>
+        <button
+          disabled={isVoteLoading}
+          onClick={() => handleVote(-1)}
+          className="down-vote-button"
+        >
           Downvote
         </button>
         {votesCountError && <p className="error">{votesCountError}</p>}
