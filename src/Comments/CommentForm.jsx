@@ -27,9 +27,14 @@ function CommentForm({ article_id, addComment, onPostError, selectedUser }) {
         value={commentInput}
         onChange={(event) => setCommentInput(event.target.value)}
         maxLength={100}
+        className="text-area"
       />
       {!commentInput.trim() && <p>Please write a comment</p>}
-      <button type="submit" disabled={!selectedUser || !commentInput.trim()}>
+      <button
+        type="submit"
+        disabled={!selectedUser || !commentInput.trim()}
+        className="post-button"
+      >
         Add Comment
       </button>
     </form>

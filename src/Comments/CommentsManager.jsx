@@ -106,6 +106,7 @@ function CommentManager({ article_id }) {
             value={selectedUser}
             onChange={handleChange}
             required
+            className="user-dropdown"
           >
             <option value="" disabled>
               {" "}

@@ -72,6 +72,7 @@ function ArticleList() {
               id="sort-by"
               value={sortBy}
               onChange={(event) => handleSortByChange(event.target.value)}
+              className="user-dropdown"
             >
               <option value="created_at">Date</option>
               <option value="comment_count">Comment Count</option>
@@ -84,6 +85,7 @@ function ArticleList() {
               id="order"
               value={order}
               onChange={(event) => handleOrderChange(event.target.value)}
+              className="user-dropdown"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
