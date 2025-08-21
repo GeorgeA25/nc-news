@@ -6,12 +6,10 @@ function Header() {
       <h1>Northcoders News</h1>
       <nav className="nav">
         <ul className="nav-list">
-          <Link className="link-names" to="/">
-            {" "}
+          <Link className="home-link-names" to="/">
             Home
           </Link>
-          <Link className="link-names" to="/topics">
-            {" "}
+          <Link className="topic-link-names" to="/topics">
             Topics
           </Link>
         </ul>

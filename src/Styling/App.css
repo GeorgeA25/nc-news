@@ -52,7 +52,7 @@ body {
 .site-header {
   text-align: center;
   padding: 1.5rem 1rem;
-  color: rgb(255, 255, 255);
+  color: rgb(36, 182, 7);
 }
 
 .site-header h1 {
@@ -60,24 +60,34 @@ body {
   font-weight: bold;
 }
 
-.nav {
-  display: flex;
-  width: 49%;
-  gap: 1.5rem;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0;
-  gap: 10rem;
-  text-align: center;
+.home-link-names {
+  margin-left: 1rem;
+  background: transparent;
+  border: none;
+  color: rgb(247, 241, 241);
+  cursor: pointer;
+  display: inline-block;
+  padding: 1rem 1rem;
+  border: 0.02rem solid rgb(179, 14, 157);
+  border-radius: 0.5rem;
+  background-color: #070000;
+  margin: 0.5rem;
+  width: fit-content;
 }
 
-.nav-link {
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.link-names {
-  color: #ddd;
+.topic-link-names {
+  margin-left: 1rem;
+  background: transparent;
+  border: none;
+  color: rgb(247, 241, 241);
+  cursor: pointer;
+  display: inline-block;
+  padding: 1rem 1rem;
+  border: 0.02rem solid rgb(179, 14, 157);
+  border-radius: 0.5rem;
+  background-color: #070000;
+  margin: 0.5rem;
+  width: fit-content;
 }
 
 h2 {
