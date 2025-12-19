@@ -5,7 +5,7 @@ A web application that lets a user view a list of articles with initial details 
 ---
 
 🌐 Live Demo
-View it online at: (https://glittery-haupia-df63e1.netlify.app/)
+View it online at: (https://nc-newsga.netlify.app/)
 
 ---
 
